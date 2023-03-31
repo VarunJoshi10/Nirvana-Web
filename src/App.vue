@@ -1,28 +1,44 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="secondary"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Nirvana logo"
+          class="shrink mr-2"
+          contain
+          src="@/assets/nirvanalogo.png"
+          transition="scale-transition"
+          width="30"
+        />
+
+        <h2 >Nirvana</h2>
+      </div>
+    </v-app-bar>
+    <v-main>
+     <router-view/>
+    </v-main>
+    
+  </v-app>
+  
+  
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
 
-nav {
-  padding: 30px;
+export default {
+  name: 'App',
+  components:
+  {
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  },
+ data() {
+  return {
+    key: value
   }
-}
-</style>
+ },
+};
+</script>
