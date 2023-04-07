@@ -13,18 +13,3 @@
     },
   }
 </script>
-
-<style lang="scss" scoped>
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: white;
-}
-
-.navbar-left {
-  display: flex;
-  align-items: center;
-}
-
