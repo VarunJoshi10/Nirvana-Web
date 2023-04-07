@@ -22,7 +22,7 @@
       <v-spacer></v-spacer>
 
         <v-btn text @click="$router.push('/login')">Login</v-btn>
-        <v-btn text>Sign Up</v-btn>
+        <v-btn text @click="$router.push('/signUp')">Sign Up</v-btn>
 
     </v-app-bar>
     <v-row justify="center" align="center">
@@ -37,6 +37,12 @@
     </v-row>
   </v-container>
 </template>
+
+<script>
+export default {
+  
+}
+</script>
 
 <style lang="scss" scoped>
 .container {

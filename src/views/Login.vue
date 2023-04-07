@@ -36,7 +36,7 @@
               width="250px"
               block
               elevation="5"
-              
+              @click="$router.push('/home')"
             >
               Login
             </v-btn>
