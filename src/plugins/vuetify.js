@@ -6,9 +6,9 @@ Vue.use(Vuetify);
 export default new Vuetify({theme: {
     themes: {
       light: {
-        primary: colors.purple.lighten4, // #E53935
-        secondary: colors.purple.lighten3, // #FFCDD2
-        accent: colors.purple.base, // #3F51B5
+        primary: colors.purple, // #E53935
+        secondary: colors.purple, // #FFCDD2
+        accent: colors.purple, // #3F51B5
       },
     },
   },
