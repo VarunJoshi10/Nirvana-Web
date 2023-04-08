@@ -12,8 +12,8 @@
 
             <v-col cols="72" sm="100" md="100">
               <v-text-field
-                label="username"
-                v-model="username"
+                label="Email"
+                v-model="email"
                 outlined
                 color="secondary"
               ></v-text-field>
@@ -36,22 +36,16 @@
               width="250px"
               block
               elevation="5"
-              @click="$router.push('/home')"
+              @click="auth()"
             >
               Login
             </v-btn>
             <br />
-            <v-btn
-            large
-              color="#ffff"
-              width="250px"
-              block
-              elevation="5"
-            >
+            <v-btn large color="#ffff" width="250px" block elevation="5">
               <v-icon left> mdi-google </v-icon>
               Log in with Google
             </v-btn>
-            <br><br>
+            <br /><br />
             <p class="login-txt">Don’t have an account? Create one!</p>
           </v-card-text>
         </v-col>
@@ -61,16 +55,28 @@
 </template>
 
 <script>
+
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+
 export default {
   data() {
     return {
-      username: "",
+      email: "",
       password: "",
     };
   },
   methods: {
     auth() {
-      alert(this.username + " " + this.password);
+      const auth = getAuth();
+      signInWithEmailAndPassword(auth, this.email, this.password)
+      .then(() => {
+        this.$router.push('/home')
+      }).catch(error => {
+        alert(error.message)
+      })
+      //alert(this.username + " " + this.password);
+      
     },
     signInWithGoogle() {
       this.$gapi.signIn().then((response) => {
@@ -84,7 +90,7 @@ export default {
             const email = response.result.emails[0].value;
             // check if email is registered and log user in
           });
-      }); 
+      });
     },
   },
 };
