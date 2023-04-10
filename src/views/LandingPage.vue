@@ -25,6 +25,7 @@
         <v-btn text @click="$router.push('/signUp')">Sign Up</v-btn>
 
     </v-app-bar>
+    
     <v-row justify="center" align="center">
       <v-col cols="4" align="center" offset="1">
         <p class="my-text">Live out your passion <br> in a community of <br> like-minded people</p>
@@ -32,10 +33,14 @@
         <p class="my-text-2">Get Started</p>
         <br><br>
         <p class="my-text">How it works</p>
+         
       </v-col>
-      <v-col cols="6" class="text-center"><v-img src="../assets/imagelp.png" style="max-width: 800px;"></v-img></v-col>
+      <v-col cols="6" class="text-center"><v-img src="../assets/imagelp.png" style="max-width: 800px;height: 300;"></v-img></v-col>
     </v-row>
-  </v-container>
+  
+    </v-container>
+
+ 
 </template>
 
 <script>
@@ -60,10 +65,12 @@ export default {
 .my-text {
   font: 750 50px 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   text-align: left;
+  font-weight: bold;
 }
 .my-text-2 {
-  color: #d3d3d3;
+  color: #838383;
   text-align: left;
-  font: 50px 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font: 30px 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  
 }
 </style>
