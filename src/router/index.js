@@ -4,6 +4,8 @@ import LandingPage from '../views/LandingPage.vue'
 import LoginView from '../views/Login.vue'
 import HomePage from '../views/HomePage.vue'
 import SignUpView from '../views/SignUp.vue'
+import MyProfilePage from '../views/MyProfilePage.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -26,6 +28,11 @@ const routes = [
     path: '/signUp',
     name: 'SignUpView',
     component: SignUpView
+  },
+  {
+    path: '/myProfilePage',
+    name: 'MyProfilePage',
+    component: MyProfilePage
   }
   
 ]

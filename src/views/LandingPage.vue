@@ -33,9 +33,14 @@
         <p class="my-text-2">Get Started</p>
         <br><br>
         <p class="my-text">How it works</p>
+
+        <v-img src="../assets/dash.png" style="max-width: 800px;height: 300;"></v-img>
          
       </v-col>
-      <v-col cols="6" class="text-center"><v-img src="../assets/imagelp.png" style="max-width: 800px;height: 300;"></v-img></v-col>
+      <v-col cols="6" class="text-center">
+        <v-img src="../assets/imagelp.png" style="max-width: 800px;height: 300;">
+      </v-img>
+    </v-col>
     </v-row>
   
     </v-container>
