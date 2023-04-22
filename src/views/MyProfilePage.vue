@@ -23,7 +23,7 @@
       </v-app-bar>
 
       <v-row>
-        <h2 class="hey-user">Hey User !</h2>
+        <h2 class="hey-user">Hey {{ username }} !</h2>
 
         <v-spacer></v-spacer>
 
@@ -36,7 +36,7 @@
         <v-col>
           <v-form ref="form" v-model="valid" lazy-validation>
             <v-text-field
-              v-model="name"
+              v-model="firstname"
               :counter="10"
               :rules="nameRules"
               label="First Name"
@@ -44,15 +44,13 @@
             ></v-text-field>
 
             <v-text-field
-              v-model="email"
-              :rules="emailRules"
+              v-model="lastname"
               label="Last Name"
               required
             ></v-text-field>
 
             <v-text-field
-              v-model="email"
-              :rules="emailRules"
+              v-model="username"
               label="Username"
               required
             ></v-text-field>
@@ -64,7 +62,44 @@
               required
             ></v-text-field>
 
-          
+            <h3>Interest</h3>
+            <v-row>
+              <v-checkbox
+                class="interest-checkbox"
+                v-model="ex4"
+                label="music"
+                color="indigo darken-3"
+                value="indigo darken-3"
+                hide-details
+              ></v-checkbox>
+
+              <v-checkbox
+                class="interest-checkbox"
+                v-model="ex4"
+                label="sports"
+                color="indigo darken-3"
+                value="indigo darken-3"
+                hide-details
+              ></v-checkbox>
+
+              <v-checkbox
+                class="interest-checkbox"
+                v-model="ex4"
+                label="photography"
+                color="indigo darken-3"
+                value="indigo darken-3"
+                hide-details
+              ></v-checkbox>
+
+              <v-checkbox
+                class="interest-checkbox"
+                v-model="ex4"
+                label="petting"
+                color="indigo darken-3"
+                value="indigo darken-3"
+                hide-details
+              ></v-checkbox>
+            </v-row>
           </v-form>
         </v-col>
       </v-card>
@@ -73,10 +108,39 @@
 </template>
 
 <script>
-export default {};
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/main";
+import { getAuth } from "firebase/auth";
+export default {
+  data() {
+    return {
+      username: "",
+      firstname: "",
+      lastname: "",
+      email: "",
+    };
+  },
+
+  async mounted() {
+    const docSnap = await getDoc(doc(db, "users", getAuth().currentUser.uid));
+
+    if (docSnap.exists()) {
+      this.username = docSnap.data().username;
+      console.log(docSnap.data().username);
+
+      this.firstname = docSnap.data().firstname;
+      this.lastname = docSnap.data().lastname;
+
+      this.email = docSnap.data().email;
+    }
+  },
+};
 </script>
 
 <style lang="scss" scoped>
+.interest-checkbox {
+  margin: 1rem;
+}
 .hey-user {
   margin: 3rem;
 }
@@ -86,7 +150,7 @@ export default {};
 .card {
   margin: 2rem;
 }
-.interests{
+.interests {
   padding: 2rem;
 }
 </style>
