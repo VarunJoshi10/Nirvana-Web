@@ -5,6 +5,7 @@ import LoginView from '../views/Login.vue'
 import HomePage from '../views/HomePage.vue'
 import SignUpView from '../views/SignUp.vue'
 import MyProfilePage from '../views/MyProfilePage.vue'
+import MySessions from '../views/MySessions.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/myProfilePage',
     name: 'MyProfilePage',
     component: MyProfilePage
+  },
+  {
+    path: '/MySessions',
+    name: 'MySessions',
+    component: MySessions
   }
   
 ]

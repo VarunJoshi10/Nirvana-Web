@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <v-container fluid class="container">
       <v-app-bar app color="secondary" dark>
         <div class="d-flex align-center">
@@ -21,64 +22,58 @@
           <v-icon size="24px"> mdi-account-circle-outline </v-icon>
         </v-btn>
       </v-app-bar>
-      <location-dialog />
-      <div class="txt-near-places">
-        <h1>Categories</h1>
-        <v-row>
-          <category-card
-            v-for="(card, index) in cards"
-            :key="index"
-            :image-src="card.img"
-          />
-        </v-row>
-      </div>
-      <div class="txt-near-places">
-        <h1>Top Locations</h1>
-        <location-chips />
-      </div>
-      <div class="txt-near-places"><h1>What’s happening near you</h1></div>
-      <near-session-card></near-session-card>
+      <Carousel></Carousel>     
+     <div class="txt-near-places">
+      <h1 >Categories</h1>
+      <v-row>
+        <category-card v-for="(card, index) in cards" :key="index" :image-src="card.img" />
+      </v-row></div>
+      <div class="txt-near-places"><h1 >Top Locations</h1>
+       <location-chips /></div>
+     
     </v-container>
     <!-- <location-dialog /> -->
   </div>
 </template>
 
 <script>
-import LocationDialog from "@/components/LocationDialog.vue";
-import CategoryCard from "@/components/CategoryCard.vue";
-import LocationChips from "@/components/LocationChips.vue";
-import NearSessionCard from '@/components/NearSessionCard.vue';
+
+import CategoryCard from '@/components/CategoryCard.vue';
+import LocationChips from '@/components/LocationChips.vue';
+import Carousel from '@/components/Carousel.vue';
 
 export default {
-  components: { LocationDialog, CategoryCard, LocationChips, NearSessionCard },
+  components: { CategoryCard, LocationChips, Carousel },
   data() {
     return {
       cards: [
-        {
-          category: "Music",
-          img: require("@/assets/category-music.png"),
-        },
-        {
-          category: "Sports and fitness",
-          img: require("@/assets/category-sports.png"),
-        },
-        {
-          category: "Photography",
-          img: require("@/assets/category-photography.png"),
-        },
-        {
-          category: "Pet Sitting",
-          img: require("@/assets/category-pets.png"),
-        },
-      ],
-    };
+      {
+        category: "Music",
+        img: require("@/assets/category-music.png"),
+      },
+      {
+        category: "Sports and fitness",
+        img: require("@/assets/category-sports.png"),
+      },
+      {
+        category: "Photography",
+        img: require("@/assets/category-photography.png"),
+      },
+      {
+        category: "Pet Sitting",
+        img: require("@/assets/category-pets.png"),
+      },
+    ],
+    }
   },
 };
 </script>
 
 <style>
 .container {
+
   background-image: url("../assets/BACKG.png");
+  
 
   /* Center and scale the image nicely */
   background-position: center;
@@ -86,6 +81,6 @@ export default {
   background-size: cover;
 }
 .txt-near-places {
-  margin: 2rem;
+    margin: 3rem;
 }
 </style>
