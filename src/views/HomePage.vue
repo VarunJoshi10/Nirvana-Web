@@ -65,6 +65,7 @@
             v-for="(card, index) in cards"
             :key="index"
             :image-src="card.img"
+            @click="navigateToPage(card.route)"
           />
         </v-row>
       </div>
@@ -116,6 +117,11 @@ export default {
         },
       ],
       sessionList: [],
+      methods: {
+  navigateToPage(route) {
+    this.$router.push('/photography');
+  }
+}
     };
   },
 };
