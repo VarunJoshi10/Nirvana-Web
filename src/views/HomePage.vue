@@ -16,7 +16,7 @@
         </div>
 
         <v-spacer></v-spacer>
-        <v-btn text @click="$router.push('/MySessions')">My Sessions</v-btn>
+        <v-btn text @click="$router.push('/categoryList')">My Sessions</v-btn>
         <v-btn text @click="$router.push('/myProfilePage')">
           <v-icon size="24px"> mdi-account-circle-outline </v-icon>
         </v-btn>

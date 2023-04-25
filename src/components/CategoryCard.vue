@@ -1,5 +1,5 @@
 <template>
-  <v-card :loading="loading" class="mx-auto my-12" max-width="300">
+  <v-card :loading="loading" class="mx-auto my-12" max-width="300" v-on:click="routeToCategoryList()">
     <template slot="progress">
       <v-progress-linear
         color="deep-purple"
@@ -8,7 +8,6 @@
       ></v-progress-linear>
     </template>
     
-
     <v-img height="400" :src="imageSrc"></v-img>
   </v-card>
 </template>
@@ -20,6 +19,11 @@ export default {
       type: String,
       required: true,
     },
+  },
+  methods: {
+    routeToCategoryList() {
+      this.$router.push('/categoryList')
+    }
   },
 };
 </script>
