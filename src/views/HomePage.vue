@@ -62,6 +62,7 @@
         <h1>Categories</h1>
         <v-row>
           <category-card
+          @click="goToCategory()"
             v-for="(card, index) in cards"
             :key="index"
             :image-src="card.img"
@@ -94,6 +95,12 @@ export default {
       querySnapshot.forEach((doc) => {
         this.sessionList.push(doc.data());
       });
+  },
+
+  methods: {
+    goToCategory() {
+      this.$router.push('/categoryList')
+    }
   },
 
   data() {
