@@ -7,6 +7,7 @@ import SignUpView from '../views/SignUp.vue'
 import MyProfilePage from '../views/MyProfilePage.vue'
 import MySessions from '../views/MySessions.vue'
 import CreateSession from '../views/CreateSession.vue'
+import CategoryList from '../views/CategoryList.vue'
 
 Vue.use(VueRouter)
 
@@ -45,8 +46,12 @@ const routes = [
     path: '/createSession',
     name: 'createSession',
     component: CreateSession
+  },
+  {
+    path: '/categoryList',
+    name: 'categoryList',
+    component: CategoryList
   }
-  
   
 ]
 
