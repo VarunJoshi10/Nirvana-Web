@@ -42,11 +42,7 @@ const routes = [
     name: 'MySessions',
     component: MySessions
   },
-  {
-    path: '/createSession',
-    name: 'createSession',
-    component: CreateSession
-  },
+ 
   {
     path: '/categoryList/:id',
     name: 'categoryList',
