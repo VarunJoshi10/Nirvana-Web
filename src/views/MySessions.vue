@@ -57,7 +57,7 @@
                   <h2 class="card-txt">{{ session.eventArea }}</h2>
                 </v-row>
               </v-col>
-              <v-btn width="300" class="card-btn" color="secondary" @click="debug()">Delete Session</v-btn>
+              <v-btn width="300" class="card-btn" color="secondary" @click="deleteEvent(session.title)">Delete Session</v-btn>
             </v-card>
           </v-col>
         </v-row>
@@ -69,8 +69,9 @@
 </template>
 
 <script>
-import { collection, getDocs } from "firebase/firestore";
+import { collection, where, query, deleteDoc, getDocs } from 'firebase/firestore';
 import { db } from "@/main";
+
 export default {
   async created () {
     const querySnapshot = await getDocs(collection(db, "all_events"));
@@ -79,15 +80,22 @@ export default {
         this.sessionList.push(doc.data());
       });
   },
+
   data() {
     return {
       sessionList: []
     }
   },
   methods: {
-    debug() {
-      console.log('Hello');
-    }
+    async deleteEvent(eventName) {
+      const q = query(collection(db, "all_events"), where("title", "==", eventName));
+    const querySnapshot = await getDocs(q);;
+
+    querySnapshot.forEach((doc) => {
+      deleteDoc(doc.ref);
+      console.log("Event deleted successfully");
+    });
+  },
   },
 };
 </script>
