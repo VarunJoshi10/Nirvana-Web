@@ -10,13 +10,7 @@ import { getFirestore } from 'firebase/firestore'
 Vue.config.productionTip = false
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDeqGpMHWXVsvTsVYmuJxCQFuK5rrGC63E",
-    authDomain: "nirvana-a2fed.firebaseapp.com",
-    databaseURL: "https://nirvana-a2fed-default-rtdb.firebaseio.com",
-    projectId: "nirvana-a2fed",
-    storageBucket: "nirvana-a2fed.appspot.com",
-    messagingSenderId: "552986497814",
-    appId: "1:552986497814:web:3bf6d8a30540c728777637"
+  // your config
 }
 
 const app = initializeApp(firebaseConfig);
