@@ -137,7 +137,7 @@
               medium
               large
               class="center"
-              @click="debug()"
+              @click="addSession()"
             >
               Add Session
             </v-btn>
@@ -152,7 +152,7 @@
 <script>
 export default {
   methods: {
-    debug() {
+    addSession() {
       // Handle adding the session here
       console.log("hello");
     },
