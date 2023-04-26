@@ -48,11 +48,10 @@ const routes = [
     component: CreateSession
   },
   {
-    path: '/categoryList',
+    path: '/categoryList/:id',
     name: 'categoryList',
     component: CategoryList
   }
-  
 ]
 
 const router = new VueRouter({

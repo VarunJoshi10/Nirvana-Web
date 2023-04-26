@@ -69,14 +69,19 @@ import { db } from "@/main";
 export default {
   async created() {
     const querySnapshot = await getDocs(collection(db, "all_events"));
-
+    
     querySnapshot.forEach((doc) => {
       this.sessionList.push(doc.data());
     });
+
+    this.id = this.$route.params
+
+    console.log(this.id);
   },
   data() {
     return {
       sessionList: [],
+      id: 0
     };
   },
 };

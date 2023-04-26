@@ -16,7 +16,7 @@
         </div>
 
         <v-spacer></v-spacer>
-        <v-btn text @click="$router.push('/categoryList')">My Sessions</v-btn>
+        <v-btn text @click="$router.push('/MySessions')">My Sessions</v-btn>
         <v-btn text @click="$router.push('/myProfilePage')">
           <v-icon size="24px"> mdi-account-circle-outline </v-icon>
         </v-btn>
@@ -25,17 +25,17 @@
 
       <div class="txt-near-places">
         <h1>What’s happening in your city !</h1>
-      
+
         <!-- displaying all sessions -->
 
         <v-row class="near-places-card">
           <v-col v-for="(session, index) in sessionList" :key="index">
             <v-card elevation="2" height="350" width="300">
               <v-img
-              lazy-src="https://picsum.photos/id/11/10/6"
+                lazy-src="https://picsum.photos/id/11/10/6"
                 max-height="170"
                 max-width="300"
-                :src = session.imageLink
+                :src="session.imageLink"
               ></v-img>
 
               <v-col>
@@ -45,7 +45,9 @@
                 </v-row>
                 <v-row class="card-row">
                   <v-icon color="#000">mdi-calendar-range</v-icon>
-                  <h2 class="card-txt">{{ session.eventDate}} - {{ session.eventTime }}</h2>
+                  <h2 class="card-txt">
+                    {{ session.eventDate }} - {{ session.eventTime }}
+                  </h2>
                 </v-row>
 
                 <v-row class="card-row">
@@ -62,7 +64,7 @@
         <h1>Categories</h1>
         <v-row>
           <category-card
-          @click="goToCategory()"
+            v-on:click.native="goToCategory(index)"
             v-for="(card, index) in cards"
             :key="index"
             :image-src="card.img"
@@ -88,18 +90,18 @@ import { db } from "@/main";
 export default {
   components: { CategoryCard, LocationChips, Carousel },
 
-  async created () {
+  async created() {
     const querySnapshot = await getDocs(collection(db, "all_events"));
 
-      querySnapshot.forEach((doc) => {
-        this.sessionList.push(doc.data());
-      });
+    querySnapshot.forEach((doc) => {
+      this.sessionList.push(doc.data());
+    });
   },
 
   methods: {
-    goToCategory() {
-      this.$router.push('/categoryList')
-    }
+    goToCategory(id) {
+      this.$router.push(`/categoryList/${id}`);
+    },
   },
 
   data() {

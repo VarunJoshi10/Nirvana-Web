@@ -57,7 +57,7 @@
                   <h2 class="card-txt">{{ session.eventArea }}</h2>
                 </v-row>
               </v-col>
-              <v-btn width="300" class="card-btn" color="secondary">Delete Session</v-btn>
+              <v-btn width="300" class="card-btn" color="secondary" @click="debug()">Delete Session</v-btn>
             </v-card>
           </v-col>
         </v-row>
@@ -82,6 +82,11 @@ export default {
   data() {
     return {
       sessionList: []
+    }
+  },
+  methods: {
+    debug() {
+      console.log('Hello');
     }
   },
 };
