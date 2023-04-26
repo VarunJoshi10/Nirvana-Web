@@ -36,7 +36,11 @@
                 align="left"
               ></v-file-input>
 
-              <v-text-field label="Add Title" outlined v-model="title"></v-text-field>
+              <v-text-field
+                label="Add Title"
+                outlined
+                v-model="title"
+              ></v-text-field>
             </v-col>
 
             <v-col cols="72" sm="100" md="100">
@@ -92,6 +96,7 @@
                 editable
                 outlined
                 item-value="text"
+                v-model="selectedEventType"
               ></v-overflow-btn>
 
               <v-overflow-btn
@@ -101,6 +106,7 @@
                 editable
                 outlined
                 item-value="text"
+                v-model="selectedEventLocation"
               ></v-overflow-btn>
 
               <v-textarea
@@ -141,7 +147,7 @@
             </v-col>
 
             <v-btn
-                color="primary"
+              color="primary"
               medium
               large
               class="center"
@@ -159,42 +165,42 @@
 
 <script>
 import { db } from "@/main";
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection } from "firebase/firestore";
 
 export default {
   methods: {
+
     async addSession() {
-      const colRef = collection(db, 'all_events')
+      const colRef = collection(db, "all_events");
       const data = {
-        'title': this.title,
-        'hostName': this.eventhost,
-        'fullName': this.fullname,
-        'email': this.email,
-        'phoneNumber': this.phone,
-        'eventAddress': this.eventAddress,
-        'eventArea': this.eventlitem,
-        'eventType': this.eventtype,
-        'eventDate':this.date ,
-        'eventTime':this.time ,
-        'eventDescription': this.description
-        
-      }
+        title: this.title,
+        hostName: this.eventhost,
+        fullName: this.fullname,
+        email: this.email,
+        phoneNumber: this.phone,
+        eventAddress: this.eventAddress,
+        eventArea: this.selectedEventLocation,
+        eventType: this.selectedEventType,
+        eventDate: this.date,
+        eventTime: this.time,
+        eventDescription: this.description,
+      };
       const docRef = await addDoc(colRef, data);
       console.log(docRef.id);
     },
     validateForm() {
       const fields = [
-      this.title,
+        this.title,
         this.eventhost,
-       this.fullname,
-         this.email,
-       this.phone,
+        this.fullname,
+        this.email,
+        this.phone,
         this.eventAddress,
         this.eventlitem,
         this.eventtype,
-        this.date ,
-        this.time ,
-        this.description
+        this.date,
+        this.time,
+        this.description,
       ];
       this.valid = fields.every((field) => !!field);
     },
@@ -210,7 +216,6 @@ export default {
       fullname: "",
       picture: null,
       description: "",
-      
       menu: false,
       date: null,
       time: "",
@@ -265,8 +270,10 @@ export default {
         "Warje",
         "Yerwada",
       ],
-      eventtype: ["Sports", "Music", "Photography", "Petting"],
-      
+      selectedEventLocation: null,
+
+      eventtype: ["sports", "music", "photography", "petting"],
+      selectedEventType: null
     };
   },
   watch: {
@@ -276,6 +283,17 @@ export default {
     description: "validateForm",
     date: "validateForm",
     time: "validateForm",
+
+    selectedEventType(newVal) {
+      this.selectedEventType = newVal;
+      console.log(this.selectedEventType)
+    },
+
+    selectedEventLocation(newVal) {
+      this.selectedEventLocation = newVal;
+      console.log(this.selectedEventLocation)
+    }
+
   },
   mounted() {
     this.validateForm();
