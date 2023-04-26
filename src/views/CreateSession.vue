@@ -170,7 +170,13 @@ export default {
         'hostName': this.eventhost,
         'fullName': this.fullname,
         'email': this.email,
-        'phoneNumber': this.phone
+        'phoneNumber': this.phone,
+        'eventAddress': this.eventAddress,
+        'eventArea': this.eventlitem,
+        'eventType': this.eventtype,
+        'eventDate':this.date ,
+        'eventTime':this.time ,
+        'eventDescription': this.description
         
       }
       const docRef = await addDoc(colRef, data);
@@ -178,13 +184,17 @@ export default {
     },
     validateForm() {
       const fields = [
-        this.title,
-        this.fullname,
-        this.picture,
-        this.description,
-        this.date,
-        this.time,
-        this.eventhost
+      this.title,
+        this.eventhost,
+       this.fullname,
+         this.email,
+       this.phone,
+        this.eventAddress,
+        this.eventlitem,
+        this.eventtype,
+        this.date ,
+        this.time ,
+        this.description
       ];
       this.valid = fields.every((field) => !!field);
     },
@@ -196,9 +206,11 @@ export default {
       eventhost: "",
       email: "",
       phone: "",
+      eventAddress: "",
       fullname: "",
       picture: null,
       description: "",
+      
       menu: false,
       date: null,
       time: "",
@@ -254,6 +266,7 @@ export default {
         "Yerwada",
       ],
       eventtype: ["Sports", "Music", "Photography", "Petting"],
+      
     };
   },
   watch: {
