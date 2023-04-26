@@ -7,7 +7,8 @@ import SignUpView from '../views/SignUp.vue'
 import MyProfilePage from '../views/MyProfilePage.vue'
 import MySessions from '../views/MySessions.vue'
 import CreateSession from '../views/CreateSession.vue'
-
+import MusicView from '../views/music.vue'
+import AddView from '../views/Addevent.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -45,8 +46,17 @@ const routes = [
     path: '/createSession',
     name: 'createSession',
     component: CreateSession
+  },
+  {
+    path: '/categoryList',
+    name: 'categoryList',
+    component: MusicView
+  },
+  {
+    path: '/add',
+    name: 'add',
+    component: AddView
   }
-  
   
 ]
 

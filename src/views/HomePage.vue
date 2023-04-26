@@ -62,6 +62,7 @@
         <h1>Categories</h1>
         <v-row>
           <category-card
+          @click="console.log('sadsadfad')"
             v-for="(card, index) in cards"
             :key="index"
             :image-src="card.img"
