@@ -36,7 +36,7 @@
                 align="left"
               ></v-file-input>
 
-              <v-text-field label="Add Title" outlined></v-text-field>
+              <v-text-field label="Add Title" outlined v-model="title"></v-text-field>
             </v-col>
 
             <v-col cols="72" sm="100" md="100">
@@ -72,6 +72,15 @@
                 required
                 outlined
                 align="left"
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="72" sm="100" md="100">
+              <v-text-field
+                v-model="eventAddress"
+                label="Address"
+                required
+                outlined
               ></v-text-field>
             </v-col>
 
@@ -132,8 +141,7 @@
             </v-col>
 
             <v-btn
-              :disabled="!valid"
-              color="primary"
+                color="primary"
               medium
               large
               class="center"
@@ -150,16 +158,44 @@
 </template>
 
 <script>
+import { db } from "@/main";
+import { addDoc, collection } from 'firebase/firestore';
+
 export default {
   methods: {
-    addSession() {
-      // Handle adding the session here
-      console.log("hello");
+    async addSession() {
+      const colRef = collection(db, 'all_events')
+      const data = {
+        'title': this.title,
+        'hostName': this.eventhost,
+        'fullName': this.fullname,
+        'email': this.email,
+        'phoneNumber': this.phone
+        
+      }
+      const docRef = await addDoc(colRef, data);
+      console.log(docRef.id);
+    },
+    validateForm() {
+      const fields = [
+        this.title,
+        this.fullname,
+        this.picture,
+        this.description,
+        this.date,
+        this.time,
+        this.eventhost
+      ];
+      this.valid = fields.every((field) => !!field);
     },
   },
+
   data() {
     return {
       title: "",
+      eventhost: "",
+      email: "",
+      phone: "",
       fullname: "",
       picture: null,
       description: "",
@@ -234,19 +270,6 @@ export default {
   computed: {
     isDateSelected() {
       return !!this.date;
-    },
-  },
-  methods: {
-    validateForm() {
-      const fields = [
-        this.title,
-        this.fullname,
-        this.picture,
-        this.description,
-        this.date,
-        this.time,
-      ];
-      this.valid = fields.every((field) => !!field);
     },
   },
 };
