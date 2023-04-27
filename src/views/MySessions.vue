@@ -75,6 +75,37 @@
       </v-row>
 
       <h2 class="create-session-txt">Scheduled Session</h2>
+
+      <v-row class="near-places-card">
+        <v-col v-for="(session, index) in sessionList" :key="index">
+          <v-card elevation="2" height="350" width="300">
+            <v-img
+              lazy-src="https://picsum.photos/id/11/10/6"
+              max-height="170"
+              max-width="300"
+              :src="session.imageLink"
+            ></v-img>
+
+            <v-col>
+              <v-row class="card-row">
+                <v-icon color="blue">mdi-music</v-icon>
+                <h2 class="card-txt">{{ session.title }}</h2>
+              </v-row>
+              <v-row class="card-row">
+                <v-icon color="#000">mdi-calendar-range</v-icon>
+                <h3 class="card-txt">
+                  {{ session.eventDate }} - {{ session.eventTime }}
+                </h3>
+              </v-row>
+
+              <v-row class="card-row">
+                <v-icon color="#000">mdi-map-marker-radius</v-icon>
+                <h3 class="card-txt">{{ session.eventArea }}</h3>
+              </v-row>
+            </v-col>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>

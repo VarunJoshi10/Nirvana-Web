@@ -70,7 +70,7 @@ export default {
     auth() {
       const auth = getAuth();
       signInWithEmailAndPassword(auth, this.email, this.password)
-      .then(() => {
+      .then(() => { 
         this.$router.push('/home')
       }).catch(error => {
         alert(error.message)
