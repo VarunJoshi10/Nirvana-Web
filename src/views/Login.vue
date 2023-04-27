@@ -78,20 +78,6 @@ export default {
       //alert(this.username + " " + this.password);
       
     },
-    signInWithGoogle() {
-      this.$gapi.signIn().then((response) => {
-        const accessToken = response.access_token;
-        this.$gapi.client
-          .request({
-            path: "/plus/v1/people/me",
-            method: "GET",
-          })
-          .then((response) => {
-            const email = response.result.emails[0].value;
-            // check if email is registered and log user in
-          });
-      });
-    },
   },
 };
 </script>
