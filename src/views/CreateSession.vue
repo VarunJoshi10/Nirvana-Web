@@ -164,20 +164,21 @@
 </template>
 
 <script>
-import { db } from "@/main";
+import { db, storage } from "@/main";
 import { addDoc, collection } from "firebase/firestore";
-import { getAuth } from 'firebase/auth';
+import { getAuth } from "firebase/auth";
 
 export default {
-
-  created () {
-    this.userUID = getAuth().currentUser.uid
+  created() {
+    this.userUID = getAuth().currentUser.uid;
   },
 
   methods: {
+    
 
     async addSession() {
       const colRef = collection(db, "all_events");
+      const downloadURL = await this.uploadImage(this.picture);
       const data = {
         title: this.title,
         hostName: this.eventhost,
@@ -190,10 +191,11 @@ export default {
         eventDate: this.date,
         eventTime: this.time,
         eventDescription: this.description,
-        userUID: this.userUID
+        userUID: this.userUID,
       };
       const docRef = await addDoc(colRef, data);
       console.log(docRef.id);
+      alert(docRef.id)
     },
     validateForm() {
       const fields = [
@@ -281,7 +283,7 @@ export default {
       selectedEventLocation: null,
 
       eventtype: ["sports", "music", "photography", "petting"],
-      selectedEventType: null
+      selectedEventType: null,
     };
   },
   watch: {
@@ -294,14 +296,13 @@ export default {
 
     selectedEventType(newVal) {
       this.selectedEventType = newVal;
-      console.log(this.selectedEventType)
+      console.log(this.selectedEventType);
     },
 
     selectedEventLocation(newVal) {
       this.selectedEventLocation = newVal;
-      console.log(this.selectedEventLocation)
-    }
-
+      console.log(this.selectedEventLocation);
+    },
   },
   mounted() {
     this.validateForm();

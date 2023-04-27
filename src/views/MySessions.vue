@@ -48,7 +48,20 @@
 
             <v-col>
               <v-row class="card-row">
-                <v-icon color="blue">mdi-music</v-icon>
+                <v-icon color="blue">
+                  <template v-if="session.eventType === 'music'">
+                    mdi-music
+                  </template>
+                  <template v-else-if="session.eventType === 'sports'">
+                    mdi-cricket
+                  </template>
+                  <template v-else-if="session.eventType === 'photography'">
+                    mdi-music
+                  </template>
+                  <template v-else-if="session.eventType === 'petting'">
+                    mdi-cricket
+                  </template>
+                </v-icon>
                 <h2 class="card-txt">{{ session.title }}</h2>
               </v-row>
               <v-row class="card-row">
@@ -88,7 +101,7 @@
 
             <v-col>
               <v-row class="card-row">
-                <v-icon color="blue">mdi-music</v-icon>
+                <v-icon color="blue">mdi-calendar-clock</v-icon>
                 <h2 class="card-txt">{{ session.title }}</h2>
               </v-row>
               <v-row class="card-row">
@@ -172,6 +185,7 @@ export default {
       querySnapshot.forEach((doc) => {
         deleteDoc(doc.ref);
         console.log("Event deleted successfully");
+        alert('Event deleted successfully');
       });
     },
   },

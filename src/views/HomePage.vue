@@ -40,7 +40,13 @@
 
               <v-col>
                 <v-row class="card-row">
-                  <v-icon color="blue">mdi-music</v-icon>
+                  <v-icon>
+                    <template v-if=" session.eventType === 'music' "> mdi-music </template>
+                    <template v-else-if="session.eventType === 'sports'"> mdi-cricket </template>
+                    <template v-else-if=" session.eventType === 'photography' "> mdi-music </template>
+                    <template v-else-if="session.eventType === 'petting'"> mdi-cricket </template>
+                  
+                  </v-icon>
                   <h2 class="card-txt">{{ session.title }}</h2>
                 </v-row>
                 <v-row class="card-row">
@@ -48,7 +54,6 @@
                   <h3 class="card-txt">
                     {{ session.eventDate }} - {{ session.eventTime }}
                   </h3>
-                  {{ index }}
                 </v-row>
 
                 <v-row class="card-row">
@@ -60,20 +65,38 @@
                     block
                     color="accent"
                     class="my-btn"
-                    @click="getDetails()"
+                    @click="getDetails(session.title)"
                   >
                     Get Details
                   </v-btn>
                 </v-card-actions>
 
                 <v-dialog v-model="showDialog" persistent max-width="500">
-                  <v-card>
-                    
-                    {{ index }}
+                  <v-card
+                    v-for="(session, index) in getDetailsList"
+                    :key="index"
+                  >
+                    <v-card-title>Session Details</v-card-title>
+                    <v-card-text>
+                      <div>Event Name: {{ session.title }}</div>
+                      <div>Host Name: {{ session.fullName }}</div>
+                      <div>
+                        Event Description: {{ session.eventDescription }}
+                      </div>
+                      <div>Event Type: {{ session.eventType }}</div>
+
+                      <div>Event Address: {{ session.eventAddress }}</div>
+                      <div>Event Area: {{ session.eventArea }}</div>
+
+                      <div>Event Date: {{ session.eventDate }}</div>
+                      <div>Event Time: {{ session.eventTime }}</div>
+                      <br /><br />
+                      <h3>Contact Number: {{ session.phoneNumber }}</h3>
+                    </v-card-text>
 
                     <v-card-actions>
                       <v-spacer></v-spacer>
-                      <v-btn text @click="showDialog = false">Close</v-btn>
+                      <v-btn text @click="closeDialogue()">Close</v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
@@ -108,14 +131,13 @@
 import CategoryCard from "@/components/CategoryCard.vue";
 import LocationChips from "@/components/LocationChips.vue";
 import Carousel from "@/components/Carousel.vue";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/main";
 
 export default {
   components: { CategoryCard, LocationChips, Carousel },
 
   async created() {
-
     console.log(this.sessionList);
 
     const querySnapshot = await getDocs(collection(db, "all_events"));
@@ -129,9 +151,29 @@ export default {
     goToCategory(id) {
       this.$router.push(`/categoryList/${id}`);
     },
-    getDetails() {
+
+    async getDetails(title) {
       this.showDialog = true;
-    }
+
+      console.log(title);
+
+      const q = query(
+        collection(db, "all_events"),
+        where("title", "==", title)
+      );
+      const querySnapshot = await getDocs(q);
+
+      querySnapshot.forEach((doc) => {
+        this.getDetailsList.push(doc.data());
+      });
+    },
+
+    closeDialogue() {
+      this.showDialog = false;
+      while (this.getDetailsList.length > 0) {
+        this.getDetailsList.pop();
+      }
+    },
   },
 
   data() {
@@ -156,11 +198,7 @@ export default {
         },
       ],
       sessionList: [],
-      methods: {
-        navigateToPage(route) {
-          this.$router.push("/photography");
-        },
-      },
+      getDetailsList: [],
     };
   },
 };
