@@ -63,25 +63,54 @@
 </template>
 
 <script>
-import { collection, getDocs } from "firebase/firestore";
+import { collection, where, query, getDocs } from "firebase/firestore";
 import { db } from "@/main";
 
 export default {
-  async created() {
-    const querySnapshot = await getDocs(collection(db, "all_events"));
-    
-    querySnapshot.forEach((doc) => {
-      this.sessionList.push(doc.data());
-    });
+  methods: {
+    async getCategoryList(type) {
+      const q = query(
+        collection(db, "all_events"),
+        where("eventType", "==", type)
+      );
+      const querySnapshot = await getDocs(q);
 
-    this.id = this.$route.params
+      querySnapshot.forEach((doc) => {
+        this.sessionList.push(doc.data());
+      });
+    },
+  },
+
+  async created() {
+    this.id = this.$route.params;
 
     console.log(this.id);
+
+    // GET data category wise
+
+    console.log(typeof this.id);
+
+    if (this.id.id === "0") {
+
+      this.getCategoryList("music");
+
+    } else if (this.id.id === "1") {
+
+      this.getCategoryList("sports");
+
+    } else if (this.id.id === "2") {
+
+      this.getCategoryList("photography");
+
+    } else if (this.id.id === "3") {
+      
+      this.getCategoryList("petting");
+    }
   },
   data() {
     return {
       sessionList: [],
-      id: 0
+      id: 0,
     };
   },
 };

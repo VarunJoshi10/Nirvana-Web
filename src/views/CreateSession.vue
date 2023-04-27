@@ -166,8 +166,14 @@
 <script>
 import { db } from "@/main";
 import { addDoc, collection } from "firebase/firestore";
+import { getAuth } from 'firebase/auth';
 
 export default {
+
+  created () {
+    this.userUID = getAuth().currentUser.uid
+  },
+
   methods: {
 
     async addSession() {
@@ -184,6 +190,7 @@ export default {
         eventDate: this.date,
         eventTime: this.time,
         eventDescription: this.description,
+        userUID: this.userUID
       };
       const docRef = await addDoc(colRef, data);
       console.log(docRef.id);
@@ -220,6 +227,7 @@ export default {
       date: null,
       time: "",
       valid: false,
+      userUID: "",
       eventlitem: [
         "Ambegaon Budruk",
         "Aundh",

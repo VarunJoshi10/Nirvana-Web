@@ -45,14 +45,14 @@
                 </v-row>
                 <v-row class="card-row">
                   <v-icon color="#000">mdi-calendar-range</v-icon>
-                  <h2 class="card-txt">
+                  <h3 class="card-txt">
                     {{ session.eventDate }} - {{ session.eventTime }}
-                  </h2>
+                  </h3>
                 </v-row>
 
                 <v-row class="card-row">
                   <v-icon color="#000">mdi-map-marker-radius</v-icon>
-                  <h2 class="card-txt">{{ session.eventArea }}</h2>
+                  <h3 class="card-txt">{{ session.eventArea }}</h3>
                 </v-row>
               </v-col>
             </v-card>
