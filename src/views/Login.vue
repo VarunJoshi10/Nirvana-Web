@@ -41,10 +41,6 @@
               Login
             </v-btn>
             <br />
-            <v-btn large color="#ffff" width="250px" block elevation="5">
-              <v-icon left> mdi-google </v-icon>
-              Log in with Google
-            </v-btn>
             <br /><br />
             <p class="login-txt">Don’t have an account? Create one!</p>
           </v-card-text>
