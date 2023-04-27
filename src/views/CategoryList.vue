@@ -53,7 +53,9 @@
             </v-card-text>
           </v-img>
           <v-card-actions>
-            <v-btn color="accent" class="my-btn"> Add to My Session </v-btn>
+            <v-btn color="accent" class="my-btn" @click="addToMySession()">
+              Add to My Session
+            </v-btn>
             <v-btn class="my-btn" color="accent"> Get Contact </v-btn>
           </v-card-actions>
         </v-card>
@@ -63,8 +65,9 @@
 </template>
 
 <script>
-import { collection, where, query, getDocs } from "firebase/firestore";
+import { collection, where, query, getDocs, addDoc } from "firebase/firestore";
 import { db } from "@/main";
+import { getAuth } from "firebase/auth";
 
 export default {
   methods: {
@@ -79,6 +82,34 @@ export default {
         this.sessionList.push(doc.data());
       });
     },
+
+    async addToMySession() {
+
+      for (const { title, eventArea, eventAddress, eventDescription, eventDate, eventTime, imageLink } of Object.values(this.sessionList)) {
+        this.title = title
+        this.eventArea = eventArea
+        this.eventDescription = eventDescription
+        this.eventDate = eventDate
+        this.eventTime = eventTime
+        this.eventAddress = eventAddress
+        this.imageLink = imageLink
+      }
+
+      const data = {
+        title: this.title,
+        eventArea: this.eventArea,
+        eventDescription: this.eventDescription,
+        eventDate: this.eventDate,
+        eventTime: this.eventTime,
+        eventAddress: this.eventAddress,
+        imageLink: this.imageLink,
+        userUID: getAuth().currentUser.uid
+      };
+
+      const colRef = collection(db, "scheduled_events");
+      const docRef = await addDoc(colRef, data);
+      alert('Event Added')
+    },
   },
 
   async created() {
@@ -91,19 +122,12 @@ export default {
     console.log(typeof this.id);
 
     if (this.id.id === "0") {
-
       this.getCategoryList("music");
-
     } else if (this.id.id === "1") {
-
       this.getCategoryList("sports");
-
     } else if (this.id.id === "2") {
-
       this.getCategoryList("photography");
-
     } else if (this.id.id === "3") {
-      
       this.getCategoryList("petting");
     }
   },
@@ -111,6 +135,14 @@ export default {
     return {
       sessionList: [],
       id: 0,
+      // variables for scheuling session
+      eventAddress: "",
+      eventArea: "",
+      eventDate: "",
+      eventDescription: "",
+      eventTime: "",
+      imageLink: "",
+      title: "",
     };
   },
 };
