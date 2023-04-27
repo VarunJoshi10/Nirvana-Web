@@ -30,7 +30,7 @@
 
         <v-row class="near-places-card">
           <v-col v-for="(session, index) in sessionList" :key="index">
-            <v-card elevation="2" height="350" width="300">
+            <v-card elevation="2" height="400" width="300">
               <v-img
                 lazy-src="https://picsum.photos/id/11/10/6"
                 max-height="170"
@@ -54,7 +54,42 @@
                   <v-icon color="#000">mdi-map-marker-radius</v-icon>
                   <h3 class="card-txt">{{ session.eventArea }}</h3>
                 </v-row>
+                <v-card-actions>
+                <v-btn block color="accent" class="my-btn" @click="showDialog = true" >
+                   Get Details
+                </v-btn>
+</v-card-actions>
+
+<v-dialog v-model="showDialog" persistent max-width="500">
+      <v-card>
+        <v-card-title>
+         Session Details 
+        </v-card-title>
+        <v-card-text>
+        
+      <div>Host Name: {{ session.title}}</div>
+      <div>Full Name: {{session.eventhost}}</div>
+      <div>Event Description: {{ session.eventDescription }}</div>
+      <div>Event Type: {{ session.eventType }}</div>
+      
+      <div>Event Address: {{ session.eventAddress }}</div>
+      <div>Event Area: {{ session.eventArea }}</div>
+     
+      <div>Event Date: {{ eventDate }}</div>
+      <div>Event Time: {{ eventTime }}</div>
+      
+     
+    </v-card-text>
+      
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn text @click="showDialog = false">Close</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+ 
               </v-col>
+             
             </v-card>
           </v-col>
         </v-row>
@@ -107,6 +142,7 @@ export default {
 
   data() {
     return {
+      showDialog: false,
       cards: [
         {
           category: "Music",
