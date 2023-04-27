@@ -99,11 +99,7 @@
         <h1>Categories</h1>
         <v-row>
           <category-card
-<<<<<<< HEAD
-          @click="console.log('sadsadfad')"
-=======
             v-on:click.native="goToCategory(index)"
->>>>>>> 4dbe07e275687b11f176d78abfcb030cc0092385
             v-for="(card, index) in cards"
             :key="index"
             :image-src="card.img"
