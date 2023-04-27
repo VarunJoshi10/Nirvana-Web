@@ -77,7 +77,7 @@
       <h2 class="create-session-txt">Scheduled Session</h2>
 
       <v-row class="near-places-card">
-        <v-col v-for="(session, index) in sessionList" :key="index">
+        <v-col v-for="(session, index) in scheduledSessionList" :key="index">
           <v-card elevation="2" height="350" width="300">
             <v-img
               lazy-src="https://picsum.photos/id/11/10/6"
@@ -117,6 +117,7 @@ import {
   query,
   deleteDoc,
   getDocs,
+  doc,
 } from "firebase/firestore";
 import { db } from "@/main";
 import { getAuth } from "firebase/auth";
@@ -137,11 +138,26 @@ export default {
     });
 
     console.log(this.userUID);
+
+    // GET Scheduled sessions
+    const sq = query(
+      collection(db, "scheduled_events"),
+      where("userUID", "==", this.userUID)
+    );
+
+    const sQuerySnapshot = await getDocs(sq);
+
+    sQuerySnapshot.forEach((doc) => {
+      this.scheduledSessionList.push(doc.data());
+    });
+
+    console.log(this.scheduledSessionList);
   },
 
   data() {
     return {
       sessionList: [],
+      scheduledSessionList: [],
       userUID: "",
     };
   },

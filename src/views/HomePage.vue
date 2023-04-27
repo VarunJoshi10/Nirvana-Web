@@ -48,6 +48,7 @@
                   <h3 class="card-txt">
                     {{ session.eventDate }} - {{ session.eventTime }}
                   </h3>
+                  {{ index }}
                 </v-row>
 
                 <v-row class="card-row">
@@ -67,21 +68,8 @@
 
                 <v-dialog v-model="showDialog" persistent max-width="500">
                   <v-card>
-                    <v-card-title> Session Details </v-card-title>
-                    <v-card-text>
-                      <div>Host Name: {{ session.title }}</div>
-                      <div>Full Name: {{ session.full }}</div>
-                      <div>
-                        Event Description: {{ session.eventDescription }}
-                      </div>
-                      <div>Event Type: {{ session.eventType }}</div>
-
-                      <div>Event Address: {{ session.eventAddress }}</div>
-                      <div>Event Area: {{ session.eventArea }}</div>
-
-                      <div>Event Date: {{ session.eventDate }}</div>
-                      <div>Event Time: {{ session.eventTime }}</div>
-                    </v-card-text>
+                    
+                    {{ index }}
 
                     <v-card-actions>
                       <v-spacer></v-spacer>
@@ -127,6 +115,9 @@ export default {
   components: { CategoryCard, LocationChips, Carousel },
 
   async created() {
+
+    console.log(this.sessionList);
+
     const querySnapshot = await getDocs(collection(db, "all_events"));
 
     querySnapshot.forEach((doc) => {
