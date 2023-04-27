@@ -6,9 +6,15 @@ import HomePage from '../views/HomePage.vue'
 import SignUpView from '../views/SignUp.vue'
 import MyProfilePage from '../views/MyProfilePage.vue'
 import MySessions from '../views/MySessions.vue'
+<<<<<<< HEAD
 import CreateSession from '../views/CreateSession.vue'
 import MusicView from '../views/music.vue'
 import AddView from '../views/Addevent.vue'
+=======
+
+import CategoryList from '../views/CategoryList.vue'
+import CreateSession from '../views/CreateSession.vue'
+>>>>>>> 4dbe07e275687b11f176d78abfcb030cc0092385
 Vue.use(VueRouter)
 
 const routes = [
@@ -46,6 +52,7 @@ const routes = [
     path: '/createSession',
     name: 'createSession',
     component: CreateSession
+<<<<<<< HEAD
   },
   {
     path: '/categoryList',
@@ -58,6 +65,15 @@ const routes = [
     component: AddView
   }
   
+=======
+  },
+ 
+  {
+    path: '/categoryList/:id',
+    name: 'categoryList',
+    component: CategoryList
+  }
+>>>>>>> 4dbe07e275687b11f176d78abfcb030cc0092385
 ]
 
 const router = new VueRouter({

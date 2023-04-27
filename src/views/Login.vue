@@ -41,10 +41,6 @@
               Login
             </v-btn>
             <br />
-            <v-btn large color="#ffff" width="250px" block elevation="5">
-              <v-icon left> mdi-google </v-icon>
-              Log in with Google
-            </v-btn>
             <br /><br />
             <p class="login-txt">Don’t have an account? Create one!</p>
           </v-card-text>
@@ -70,27 +66,13 @@ export default {
     auth() {
       const auth = getAuth();
       signInWithEmailAndPassword(auth, this.email, this.password)
-      .then(() => {
+      .then(() => { 
         this.$router.push('/home')
       }).catch(error => {
         alert(error.message)
       })
       //alert(this.username + " " + this.password);
       
-    },
-    signInWithGoogle() {
-      this.$gapi.signIn().then((response) => {
-        const accessToken = response.access_token;
-        this.$gapi.client
-          .request({
-            path: "/plus/v1/people/me",
-            method: "GET",
-          })
-          .then((response) => {
-            const email = response.result.emails[0].value;
-            // check if email is registered and log user in
-          });
-      });
     },
   },
 };

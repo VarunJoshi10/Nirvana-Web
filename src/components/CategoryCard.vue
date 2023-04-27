@@ -8,7 +8,6 @@
       ></v-progress-linear>
     </template>
     
-
     <v-img height="400" :src="imageSrc"></v-img>
   </v-card>
 </template>

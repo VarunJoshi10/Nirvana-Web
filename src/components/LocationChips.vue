@@ -27,7 +27,6 @@
 .custom-chip {
   min-width: 300px; /* Adjust this value as per your requirement */
   text-align: center;
-  text-justify: auto;
   font-weight: bold;
   border-width: 2px;
 }
